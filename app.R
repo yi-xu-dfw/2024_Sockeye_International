@@ -7,13 +7,26 @@ library(tidyverse)
 
 # Define UI
 ui <- fluidPage(
+  tags$head(
+    tags$style(HTML("
+      .top-right-img {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        width: 90px;  /* Adjust size as needed */
+        height: auto;
+      }
+    "))),
   titlePanel("Sockeye Forecasting App using Nearest Neighbor Method"),
   sidebarLayout(
     sidebarPanel(
       fileInput("data_file", "Upload SR data", accept = ".csv"),
       uiOutput("stock_selector"),
       numericInput("N", "Enter N of nearest years:", value = 2, min = 1, max = 10),
-      numericInput("forecast_year", "Enter Forecast Year:", value = 2024, min = 1900, max = 2100)
+      numericInput("forecast_year", "Enter Forecast Year:", value = 2024, min = 1900, max = 2100),
+      br(),strong("Developed by Yi Xu"), 
+      br(),strong("Last update 2025.3.9."),
+      br(),strong("All rights reserved."),
     ),
     mainPanel(
       tabsetPanel(
@@ -21,7 +34,11 @@ ui <- fluidPage(
         tabPanel("Raw Data", tableOutput("raw_data_table"))
       )
     )
-  )
+  ),
+  
+  # Add image to bottom-left corner
+  tags$img(src = "https://raw.githubusercontent.com/yi-xu-dfw/2024_Sockeye_International/main/Salmon%20counts.jpg
+", class = "top-right-img")
 )
 
 # Define Server
